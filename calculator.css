@@ -1,0 +1,76 @@
+/*
+    Name: Justin Nguyen
+    Date: 09.03.24
+    Section: CSE 190e
+    This is the calculator.css page for my project.
+    It is used to stylize this page to make it more
+    "blackjack-like" and add my own spice.
+*/
+
+body {
+    background-color: #446755;
+    margin: 0px;
+    padding: 0px;
+    font-family: "New Amsterdam", sans-serif;
+    color: #f5f5f5e4;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#loofy {
+    max-height: 200px;
+    max-width: 200px;
+}
+
+#heart {
+    max-height: 100px;
+    max-width: auto;
+}
+
+h2 {
+    font-family: "Style Script", cursive;
+    display: flex;
+    flex-direction: column;
+}
+
+#percentage {
+    font-size: 20pt;
+    color: #ffd95b;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#conclusion {
+    font-size: 50pt;
+    display: flex;
+    justify-content: center;
+}
+
+#copyright {
+    display: flex;
+    justify-content: center;
+}
+
+#dealer-cards, #player-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card {
+    max-width: 25%;
+    height: auto;
+    margin: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+}
