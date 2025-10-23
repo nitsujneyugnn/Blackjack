@@ -69,6 +69,8 @@ let deck = [
   { html: '<img src="cards/king_of_spades2.png" alt="king of spades" class="card">', value: 10 }
 ];
 
+const fullDeck = structuredClone(deck);
+
 // Fisher–Yates shuffle
 function shuffleDeck(deck) {
   for (let i = deck.length - 1; i > 0; i--) {
@@ -90,6 +92,9 @@ function createHand() {
 let player = createHand();
 let dealer = createHand();
 let dealerCard2 = "";
+let wins = 0;
+let losses = 0;
+let ties = 0;
 
 // Draws a card from the deck into a hand
 function drawCard(hand) {
@@ -182,17 +187,57 @@ function dealerPlays() {
   percentage.innerHTML = "";
   if ((dealer.value > player.value || player.value > 21) && dealer.value < 22) {
     conclusion.innerHTML = "You lose";
+    losses++;
   } else if ((dealer.value < player.value || dealer.value > 21) && player.value < 22) {
     conclusion.innerHTML = "You win";
+    wins++;
   } else {
     conclusion.innerHTML = "Tie";
+    ties++;
   }
+
+  // Updates Scoreboard
+  document.getElementById("w").innerHTML = "Wins: " + wins;
+  document.getElementById("l").innerHTML = "Losses: " + losses;
+  document.getElementById("t").innerHTML = "Ties: " + ties;
+
+  document.getElementById("hit").disabled = true;
+  document.getElementById("stay").disabled = true;
+  let restart = document.getElementById("restart");
+  restart.style.display = "block";
+  document.getElementById("restart").style.display = "block"
+}
+
+function resetGame() {
+  deck = structuredClone(fullDeck);
+  shuffleDeck(deck);
+  player = createHand();
+  dealer = createHand();
+  dealerCard2 = "";
+
+  document.getElementById("dealer-cards").innerHTML = "";
+  document.getElementById("player-cards").innerHTML = "";
+  document.getElementById("conclusion").textContent = "";
+  document.getElementById("percentage").innerHTML = "";
+  document.getElementById("restart").style.display = "none";
+  document.getElementById("hit").disabled = false;
+  document.getElementById("stay").disabled = false;
+
+  dealCards();
 }
 
 // Sets game up and gives player's hit and stay buttons
 window.onload = function() {
   shuffleDeck(deck);
   dealCards();
+
+  //  Sets up scoreboard
+  let w = document.getElementById("w");
+  let l = document.getElementById("l");
+  let t = document.getElementById("t");
+  w.innerHTML = "Wins: " + wins;
+  l.innerHTML = "Losses: " + losses;
+  t.innerHTML = "Ties: " + ties;
 
   let hit = document.getElementById("hit");
   hit.onclick = function() {
@@ -214,4 +259,9 @@ window.onload = function() {
   stay.onclick = function() {
     dealerPlays();
   };
+
+  let restart = document.getElementById("restart");
+  restart.onclick = function() {
+    resetGame();
+  }
 };
