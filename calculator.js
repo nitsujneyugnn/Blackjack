@@ -69,7 +69,41 @@ let deck = [
   { html: '<img src="cards/king_of_spades2.png" alt="king of spades" class="card">', value: 10 }
 ];
 
+// Set up music and sound
 const fullDeck = structuredClone(deck);
+const loverGirl = new Audio("sounds/loverGirl.mp3");
+loverGirl.loop = true;
+
+const sounds = {
+  boom: new Audio("sounds/boom.mp3"),
+  win: new Audio("sounds/win.mp3"),
+  fart: new Audio("sounds/fart.mp3"),
+  rizz: new Audio("sounds/rizz.mp3"),
+  bruh: new Audio("sounds/bruh.mp3"),
+  stink: new Audio("sounds/stink.mp3")
+}
+
+sounds.boom.volume = 0.3;
+sounds.win.volume = 0.3;
+sounds.rizz.volume = 0.3;
+sounds.stink.volume = 0.2;
+sounds.bruh.volume = 0.3;
+loverGirl.volume = 0.1;
+
+// Stops every sound playing and rewinds back to beginning
+function stopAllSounds() {
+  Object.entries(sounds).forEach(([name, s]) => {
+    if (s instanceof Audio) {
+      s.pause();
+      s.currentTime = 0;
+    }
+  });
+}
+
+function playSound(sound) {
+  sound.currentTime = 0;
+  sound.play();
+}
 
 // Fisher–Yates shuffle
 function shuffleDeck(deck) {
@@ -101,7 +135,7 @@ function drawCard(hand) {
   let card = deck.pop();
 
   // Ace handling
-  if (card.value === 1 && !hand.hasAce) {
+  if (card.value === 1 && !hand.firstAceUsed) {
     hand.value += 11;
     hand.hasAce = true;
   } else {
@@ -118,11 +152,7 @@ function calculateBustPercentage(hand) {
     return 0; // can't bust on next card
   }
 
-  // Adjust bustpoint for hard hand
   let bustpoint = 22 - hand.value;
-  if (hand.hasAce && !hand.firstAceUsed) {
-    bustpoint += 10;
-  }
 
   // Count how many cards would bust
   let count = deck.filter(c => c.value > bustpoint - 1).length;
@@ -182,17 +212,21 @@ function dealerPlays() {
   }
 
   // Decide outcome
+  stopAllSounds();
   let conclusion = document.getElementById("conclusion");
   let percentage = document.getElementById("percentage");
   percentage.innerHTML = "";
   if ((dealer.value > player.value || player.value > 21) && dealer.value < 22) {
     conclusion.innerHTML = "You lose";
+    playSound(sounds.stink);
     losses++;
   } else if ((dealer.value < player.value || dealer.value > 21) && player.value < 22) {
     conclusion.innerHTML = "You win";
+    playSound(sounds.win);
     wins++;
   } else {
     conclusion.innerHTML = "Tie";
+    playSound(sounds.bruh);
     ties++;
   }
 
@@ -208,6 +242,7 @@ function dealerPlays() {
   document.getElementById("restart").style.display = "block"
 }
 
+// Restarts game by reshuffling a full deck and dealing cards again
 function resetGame() {
   deck = structuredClone(fullDeck);
   shuffleDeck(deck);
@@ -224,6 +259,14 @@ function resetGame() {
   document.getElementById("stay").disabled = false;
 
   dealCards();
+
+  //  Scrolls back down to game after restart
+  setTimeout(() => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "auto"
+    });
+  }, 50);
 }
 
 // Sets game up and gives player's hit and stay buttons
@@ -241,6 +284,7 @@ window.onload = function() {
 
   let hit = document.getElementById("hit");
   hit.onclick = function() {
+    playSound(sounds.boom);
     let playerCardsDiv = document.getElementById("player-cards");
     if (player.value < 22) {
       playerCardsDiv.innerHTML += drawCard(player);
@@ -257,11 +301,21 @@ window.onload = function() {
 
   let stay = document.getElementById("stay");
   stay.onclick = function() {
+    playSound(sounds.rizz);
     dealerPlays();
   };
 
   let restart = document.getElementById("restart");
   restart.onclick = function() {
     resetGame();
+  }
+
+  let start = document.getElementById("start");
+  start.onclick = function() {
+    document.getElementById("game").style.display = "block";
+    document.getElementById("title").style.display = "none";
+    document.getElementById("foot").style.display = "none";
+    loverGirl.play();
+    game.classList.add("fade-in");
   }
 };

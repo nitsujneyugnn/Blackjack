@@ -1,13 +1,8 @@
+<!-- html file for blackjack page -->
+
 <!DOCTYPE html>
 <html lang="en">
-<!--
-    Name: Justin Nguyen
-    Date: 09.03.24
-    Section: CSE 190e
-    This is the calculator.html page for my project.
-    It includes a recreated blackjack with a bust
-    percentage calculator.
--->
+
     <head>
         <title>Blackjack</title>
         <link rel="stylesheet" href="calculator.css"/>
@@ -15,33 +10,38 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&family=Style+Script&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <header>
-            <h1>Black Overflow Jack</h1>
-            <p><br>Play Blackjack with a Bust Percentage Calculator!<br>Refresh the page to restart</p>
+        <header id="title">
+            <h1>black overflow jack</h1>
+            <p><br>play blackjack with laufey using a bust percentage calculator!</p>
+            <button id="start">start</button>
         </header>
-        <main>
+        <main id="game" style="display:none;">
         <div id="laufey">
             <!--
                 Image found https://www.flickr.com/photos/wfuv/52272429970/in/photostream/
                 and is made available with a Creative Commons attribution license
             -->
-            <h2>Laufey (The House) <img id="loofy" src="img/loofy.jpg" alt="Music Artist Laufey"></h2>
+            <h2><img id="loofy" src="img/loofy.jpg" alt="Music Artist Laufey"></h2>
         </div>
         <div id="dealer-cards">
 
         </div>
-        <div id="percentage">
+        <div id="middle">
+            <div id="percentage">
 
+            </div>
+            <div id="conclusion"></div>
+            <button id="restart" style="display:none;">Restart</button>
+            <div id="score">
+                <div id="w"></div>
+                <div id="l"></div>
+                <div id="t"></div>
+            </div>
         </div>
-        <div id="conclusion"></div>
-        <div id="score">
-            <div id="w"></div>
-            <div id="l"></div>
-            <div id="t"></div>
-        </div>
-        <button id="restart" style="display:none;">Restart</button>
+        
         <div id="player">
             <div id="player-cards"> </div>
         </div>
@@ -50,7 +50,7 @@
             <button id="stay">Stay</button>
         </div>
         </main>
-        <footer>
+        <footer id="foot">
             <div class="copyright">
                 Parts of this page © Justin Nguyen, for other attributions, refer to page source.
                 Made with <img id="heart" src="img/animatedheart.gif" alt="animated heart">

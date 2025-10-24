@@ -1,111 +1,278 @@
-/*
-    Name: Justin Nguyen
-    Date: 09.03.24
-    Section: CSE 190e
-    This is the calculator.css page for my project.
-    It is used to stylize this page to make it more
-    "blackjack-like" and add my own spice.
-*/
+/* CSS Styling page for blackjack pages */
 
-body {
-    background-color: #446755;
-    margin: 0px;
-    padding: 0px;
+/* ------------------------------
+   Base / Reset
+------------------------------ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    height: 100%;
+  }
+  
+  body {
+    background: linear-gradient(to bottom, #3f9669 0%, #55aa7f 50%, #6fbf95 120%);
     font-family: "New Amsterdam", sans-serif;
+    font-size: clamp(14px, 2vw, 28px);
     color: #f5f5f5e4;
-}
+    color: #eae8e4;
+    text-shadow: 0 0 3px #ffd95b,
+                0 0 6px #c3a760,
+                0 0 9px #d6b792;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-header {
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to bottom, #3f9669, #55aa7f, #6fbf95);
+  }
+
+  #title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 2rem;
+  }
+  
+  /* ------------------------------
+    Layout Containers
+  ------------------------------ */
+  header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;  
-}
-
-#loofy {
-    max-height: 200px;
-    max-width: 200px;
-}
-
-#heart {
-    width: min(10vw, 40px);
-    height: auto;
-
-}
-
-h2 {
+    text-align: center;
+    flex: 1;
+  }
+  
+  main {
+    flex: 1;
+  }
+  
+  footer {
+    display: flex;
+    justify-content: center;
+    font-size: clamp(4px, 2vw, 15px);
+    background: transparent;
+  }
+  
+  /* ------------------------------
+    Typography
+  ------------------------------ */
+  h2 {
     font-family: "Style Script", cursive;
+    font-size: clamp(20px, 5vw, 36px);
     display: flex;
     flex-direction: column;
-}
-
-#percentage {
-    font-size: 20pt;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  #percentage {
+    font-size: clamp(20px, 5vw, 36px);
     color: #ffd95b;
     margin: 20px;
     display: flex;
     justify-content: center;
-}
-
-#conclusion {
+  }
+  
+  #conclusion {
     font-size: 50pt;
     display: flex;
     justify-content: center;
-}
-
-#copyright {
+  }
+  
+  #w, #t, #l {
+    font-size: clamp(1px, 4vw, 18px);
+  }
+  
+  /* ------------------------------
+    Media / Images
+  ------------------------------ */
+  #loofy {
+    width: clamp(60px, 30vw, 150px);
+    height: auto;
+    border-radius: 50%;
+    margin: 10px;
+    margin-top: 20px;
+    box-shadow: 0 15px 10px rgba(0,0,0,0.3);
+  }
+  
+  #heart {
+    width: min(10vw, 40px);
+    height: auto;
+  }
+  
+  #laufey {
     display: flex;
     justify-content: center;
-}
-
-#dealer-cards, #player-cards {
+  }
+  
+  /* ------------------------------
+     Cards & Game Area
+  ------------------------------ */
+  #dealer-cards,
+  #player-cards {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 10px;
-}
-
-.card {
-    width: min(12vw, 150px); 
-    height: auto;
+  }
+  
+  .card {
+    width: clamp(60px, 15vw, 100px);
     margin: 5px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
+    box-shadow: 0 5px 6px rgba(0,0,0,0.3);
+  }
 
-footer {
+  #game {
+    display: none;
+    opacity: 0;
+  }
+  
+  /* ------------------------------
+    Buttons
+  ------------------------------ */
+  #buttons {
     display: flex;
     justify-content: center;
-}
-
-#laufey {
-    display: flex;
-    justify-content: center;
-    
-}
-
-#buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-button {
-    font-size: clamp(16px, 4vw, 24px);
-    max-width: 150px;
-    background-color: #ffd95b;
-    color: #333;
+    gap: 5px;
+  }
+  
+  button {
+    font-family: "New Amsterdam", sans-serif;
+    background: linear-gradient(to bottom, #ffdf74, #de7316);
+    color: #250a0a;
     border: none;
-    cursor: pointer;
-    flex-shrink: 0; 
-    padding: 0.6em 1.2em;
-    margin: 0.5em;
     border-radius: 20px;
-    flex: 1;
-}
+    cursor: pointer;
+  
+    width: clamp(100px, 20vw, 500px);
+    padding: clamp(0.4em, 2vw, 1em) clamp(0.8em, 4vw, 2em);
+    font-size: clamp(18px, 4vw, 28px);
+  
+    margin: 0.5em;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+  
+  #restart {
+    width: clamp(50px, 20vw, 200px);
+  }
+  
+  /* ------------------------------
+    Utility Containers
+  ------------------------------ */
+  #middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #copyright {
+    display: flex;
+    justify-content: center;
+  }
 
-#restart {
-    margin: 10px auto;
-}
+  /* ------------------------------
+    Animations
+  ------------------------------ */
+    .fade-in {
+        animation: fadeIn 0.8s ease forwards;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    button:hover {
+        background: linear-gradient(to bottom, #ffe680, #ffbf00);
+        transform: translateY(-3px); /* subtle lift */
+        box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      }
+  
+  /* ------------------------------
+    Responsive Adjustments
+  ------------------------------ */
+  @media (max-width: 768px) {
+
+    #title {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        font-size: 2rem;
+    }
+
+    #start {
+        font-size: 3rem;
+        display: inline-block;
+        padding: 2rem 3rem;
+        width: auto;
+    }
+
+    h1, h2 {
+      font-size: 3rem;
+    }
+
+    #percentage,
+    #w,#l, #t {
+        font-size: 1.5rem;
+    }
+
+    #restart {
+        width: auto;
+        padding: 2rem 1rem;
+        font-size: clamp(14px, 4vw, 24px);
+        z-index: 1001;
+    }
+
+    #buttons {
+        flex-direction: row;
+        margin-top: 1;
+        bottom: 2%;
+        left: 0;
+        width: 100%;
+        height: auto;
+        justify-content: space-around;
+        padding: 1rem 2rem;
+        min-height: 60px;
+        z-index: 1000;
+        font-size: 2rem;
+    }
+
+    #buttons button {
+        flex: 1;
+        margin: 0 0.5rem;
+        padding: 1rem 2rem;
+        font-size: 2rem;
+        min-height: 70px;
+        max-width: 200px;
+      }
+  }
+  
+  @media (max-width: 480px) {
+    .card {
+      width: 30vw;
+      margin: 0;
+    }
+    button {
+      width: 40%;
+    }
+
+    #buttons {
+        position: fixed;
+    }
+  }
+  
