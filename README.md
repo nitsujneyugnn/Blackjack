@@ -19,3 +19,13 @@ CHANGELOG:
 -  Implemented restart game without having to refresh the page
 -  Implemented scoreboard to keep track of player stats
 -  Fixed bug where players can continue to hit or stay after a game ended
+
+10/23/2025
+-  Added support for mobile viewports
+-  Revamped color
+-  Added button animations
+-  Added win, lose, button sound effects
+-  Added Lover Girl
+-  Fixed bug of not busting in instance of drawing an ace
+-  Fixed bug where bust percentage showed for soft hand instead of hard hand when applicable
+-  Added autoscroll down during restart for user convenience
